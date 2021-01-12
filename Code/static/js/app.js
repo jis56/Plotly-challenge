@@ -21,6 +21,32 @@ function init() {
   });
 }
 
+
 init();
 
-//
+//functions to clean and create bacteria/ouid lists
+function fixBacteria(name) {
+    var listBacteria = [];
+  
+    for (var i = 0; i < name.length; i++) {
+      var stringName = name[i].toString();
+      var splitValue = stringName.split(";");
+      if (splitValue.length > 1) {
+        listBacteria.push(splitValue[splitValue.length - 1]);
+      } else {
+        listBacteria.push(splitValue[0]);
+      }
+    }
+    return listBacteria;
+  }
+  
+  function fixOuid(name) {
+    var listOuid = [];
+    for (var i = 0; i < name.length; i++) {
+      listOuid.push(`OTU ${name[i]}`);
+    }
+    return listOuid;
+  }
+
+
+
