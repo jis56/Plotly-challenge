@@ -2,7 +2,7 @@ var data;
 
 //function to create gauge chart based on selected value
 function gaugeChart(valueSelect) {
-    var filteredValue = data.metadata.filter(value => value.id == valueSelect);
+    var filteredValue = data.metadata.filter(value => value.id == +valueSelect);
     var weeklyFreq = filteredValue[0].wfreq;
   
     var guageData = [

@@ -20,10 +20,10 @@ function init() {
 };
   
 /* function initPlot() {
-    demographicInfo(940);
-    barChart(940);
-    bubbleChart(940);
-    gaugeChart(940);
+    demographicInfo("940");
+    barChart("940");
+    bubbleChart("940");
+    gaugeChart("940");
   };
 
 initPlot(); */
@@ -67,7 +67,7 @@ function plotFunctions() {
 };
 
 function demographicInfo(valueSelect) {
-    var filteredValue = data.metadata.filter(d => d.id == valueSelect);
+    var filteredValue = data.metadata.filter(d => d.id == +valueSelect);
 
     var panel = d3.select(".panel-body");
     panel.html("");
@@ -81,7 +81,7 @@ function demographicInfo(valueSelect) {
     }
 
 function barChart(valueSelect) {
-  var filteredValue = data.samples.filter(d => d.id == valueSelect);
+  var filteredValue = data.samples.filter(d => d.id == +valueSelect);
   var ouid = filteredValue.map(d => d.otu_ids);
   ouid = fixOuid(ouid[0].slice(0, 10));
   var valueX = filteredValue.map(d => d.sample_values);
@@ -115,7 +115,7 @@ function barChart(valueSelect) {
 
 
 function bubbleChart(valueSelect) {
-  var filteredValue = data.samples.filter(value => value.id == valueSelect);
+  var filteredValue = data.samples.filter(value => value.id == +valueSelect);
   var ouid = filteredValue.map(d => d.otu_ids);
   ouid = ouid[0];
   var yValue = filteredValue.map(d => d.sample_values);
