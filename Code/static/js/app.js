@@ -6,11 +6,10 @@ function init() {
   d3.json("data/samples.json").then(incomingData => {
     data = incomingData;
     var selectValues = incomingData.names;
-
-    var selectOpt = d3.select("#selDataset");
+    var selectOption = d3.select("#selDataset");
 
     selectValues.forEach(value => {
-      selectOpt
+      selectOption
         .append("option")
         .text(value)
         .attr("value", function() {
@@ -20,6 +19,14 @@ function init() {
   });
 };
   
+/* function initPlot() {
+    demographicInfo(940);
+    barChart(940);
+    bubbleChart(940);
+    gaugeChart(940);
+  };
+
+initPlot(); */
 
 init();
 
@@ -29,11 +36,11 @@ function fixBacteria(name) {
   
     for (var i = 0; i < name.length; i++) {
       var stringName = name[i].toString();
-      var splitValue = stringName.split(";");
-      if (splitValue.length > 1) {
-        listBacteria.push(splitValue[splitValue.length - 1]);
+      var splitName = stringName.split(";");
+      if (splitName.length > 1) {
+        listBacteria.push(splitName[splitName.length - 1]);
       } else {
-        listBacteria.push(splitValue[0]);
+        listBacteria.push(splitName[0]);
       }
     }
     return listBacteria;
@@ -60,7 +67,7 @@ function plotFunctions() {
 };
 
 function demographicInfo(valueSelect) {
-    var filteredValue = data.metadata.filter(value => value.id == valueSelect);
+    var filteredValue = data.metadata.filter(d => d.id == valueSelect);
 
     var panel = d3.select(".panel-body");
     panel.html("");
@@ -74,7 +81,7 @@ function demographicInfo(valueSelect) {
     }
 
 function barChart(valueSelect) {
-  var filteredValue = data.samples.filter(value => value.id == valueSelect);
+  var filteredValue = data.samples.filter(d => d.id == valueSelect);
   var ouid = filteredValue.map(d => d.otu_ids);
   ouid = fixOuid(ouid[0].slice(0, 10));
   var valueX = filteredValue.map(d => d.sample_values);
@@ -101,9 +108,9 @@ function barChart(valueSelect) {
     }
   };
 
-  var dataV = [trace];
+  var barData = [trace];
 
-  Plotly.newPlot("bar", dataV, layout);
+  Plotly.newPlot("bar", barData, layout);
 }
 
 
@@ -128,14 +135,14 @@ function bubbleChart(valueSelect) {
     text: otu_label
   };
 
-  var data2 = [trace1];
+  var bubbleData = [trace1];
 
   var layout = {
     showlegend: false,
     xaxis: { title: "OTU ID" }
   };
 
-  Plotly.newPlot("bubble", data2, layout);
+  Plotly.newPlot("bubble", bubbleData, layout);
 }
 
 

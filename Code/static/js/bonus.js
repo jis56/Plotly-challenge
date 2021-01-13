@@ -5,7 +5,7 @@ function gaugeChart(valueSelect) {
     var filteredValue = data.metadata.filter(value => value.id == valueSelect);
     var weeklyFreq = filteredValue[0].wfreq;
   
-    var bubbleData = [
+    var guageData = [
       {
         type: "indicator",
         mode: "gauge",
@@ -46,5 +46,5 @@ function gaugeChart(valueSelect) {
     font: { color: "black", family: "Arial" }
     };
     
-    Plotly.newPlot("gauge", bubbleData, layout);
+    Plotly.newPlot("gauge", guageData, layout);
   }
