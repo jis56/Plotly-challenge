@@ -16,19 +16,12 @@ function init() {
           return value;
         });
     });
+    d3.selectAll("#selDataset").on("change", plotFunctions);
+    d3.select('#selDataset').property('value', 940);
+  
+    plotFunctions();
   });
 };
-  
-/* function initPlot() {
-    demographicInfo("940");
-    barChart("940");
-    bubbleChart("940");
-    gaugeChart("940");
-  };
-
-initPlot(); */
-
-init();
 
 //functions to clean and create bacteria/ouid lists
 function fixBacteria(name) {
@@ -54,8 +47,6 @@ function fixBacteria(name) {
     return listOuid;
   }
 
-//changing plots and demographic info based on selected data
-d3.selectAll("#selDataset").on("change", plotFunctions);
 
 function plotFunctions() {
   var valueSelect = d3.select("#selDataset").node().value;
@@ -145,4 +136,4 @@ function bubbleChart(valueSelect) {
   Plotly.newPlot("bubble", bubbleData, layout);
 }
 
-
+init();
